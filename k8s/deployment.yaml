@@ -18,7 +18,7 @@ spec:
       containers:
       - name: web
         image: devsecops-demo:v1
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Never
         ports:
         - containerPort: 5000
 ---
