@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo-website
+  namespace: devsecops-lab
+  labels:
+    app: demo-website
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: demo-website
+  template:
+    metadata:
+      labels:
+        app: demo-website
+    spec:
+      containers:
+      - name: web
+        image: devsecops-demo:v1
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 5000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: demo-website-svc
+  namespace: devsecops-lab
+spec:
+  type: ClusterIP
+  selector:
+    app: demo-website
+  ports:
+  - port: 80
+    targetPort: 5000
